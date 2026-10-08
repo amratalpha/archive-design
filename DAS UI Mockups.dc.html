@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/modernist-b79fc91b-18f0-474d-8dd8-839d1da5a6b4/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="_ds/modernist-b79fc91b-18f0-474d-8dd8-839d1da5a6b4/_ds_bundle.js"></script>
+<style>
+:root{--color-text:#12312b;--color-divider:color-mix(in srgb,#12312b 40%,transparent);--color-accent:#2e9e6e;--color-accent-2:#2e9e6e;--color-accent-100:#eef8f2;--color-accent-200:#d6efe1;--color-accent-300:#b3e0c8;--color-accent-400:#7ec9a4;--color-accent-500:#3fac7d;--color-accent-600:#2b8f66;--color-accent-700:#1f6f4f;--color-accent-800:#17513b;--color-accent-900:#10362a;--color-accent-2-100:#eef8f2;--color-accent-2-800:#17513b}
+[data-theme="red"]{--color-text:#201e1d;--color-accent:#ec3013;--color-accent-100:#fff2ef;--color-accent-200:#ffe0d9;--color-accent-300:#ffc4b8;--color-accent-400:#ff9783;--color-accent-500:#ff563c;--color-accent-600:#dd2b0f;--color-accent-700:#ae1800;--color-accent-800:#7c1405;--color-accent-900:#4d170e;--color-accent-2-100:#fff2ef;--color-accent-2-800:#71261b}
+body{margin:0;background:#e6e5e3}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-900)}
+[lang="ar"]{font-family:"IBM Plex Sans Arabic",var(--font-body);font-style:normal}
+i[lang]{font-style:normal}
+[data-lang="en"] [lang="ar"]{display:none}
+[data-lang="ar"] [lang="en"]{display:none}
+[data-lang="both"] i[lang="ar"]{color:color-mix(in srgb,currentColor 70%,transparent);margin-inline-start:6px}
+[data-lang="both"] h1 i[lang="ar"],[data-lang="both"] h2 i[lang="ar"],[data-lang="both"] h3 i[lang="ar"]{display:block;margin:2px 0 0;font-size:.7em;color:inherit}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08)}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#12312b;color:#fff;text-decoration:none}
+.dv-tname{font:600 13px/1.2 Archivo,system-ui,sans-serif;color:#12312b}
+.dv-opts{display:flex;flex-direction:column;gap:36px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#12312b;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 12px/1.3 Archivo,system-ui,sans-serif;color:rgba(0,0,0,.6)}
+.dv-card{width:1280px;background:var(--color-bg);border:1px solid rgba(0,0,0,.1);box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden;font-family:var(--font-body);color:var(--color-text)}
+.dv-opt:target .dv-oid{background:var(--color-accent);color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 Archivo,system-ui,sans-serif;color:rgba(0,0,0,.55);max-width:1280px}
+.dv-note{font:13px/1.55 Archivo,system-ui,sans-serif;color:#12312b;max-width:1280px;background:#f3f2f2;border-top:2px solid #12312b;padding:16px 20px;margin:0 0 28px}
+.dv-note b{font-weight:600}
+.req{color:var(--color-accent-700);font-weight:800;margin-inline-start:2px}
+.sys{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-600);margin-inline-start:6px}
+.opt{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-500);margin-inline-start:6px}
+.k{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600)}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;direction:ltr;unicode-bidi:isolate}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:2px 8px;border:1px solid currentColor;font-weight:600;white-space:nowrap}
+.p-open{color:#2f6f3f}.p-sens{color:#8a5d10}.p-conf{color:#9a4420}.p-secr{color:#7d1f2e}
+.side a{display:flex;justify-content:space-between;padding:9px 14px;font-size:13px;color:inherit;text-decoration:none;border-inline-start:3px solid transparent}
+.side a:hover{background:var(--color-accent-100);color:inherit}
+.side a[aria-current="page"]{border-inline-start-color:var(--color-accent);background:var(--color-accent-100);font-weight:600}
+.step{display:flex;align-items:center;gap:8px;font-size:12px}
+.step i{width:10px;height:10px;display:block;border:1.5px solid var(--color-neutral-500);flex:none}
+.step.done i{background:var(--color-accent);border-color:var(--color-accent)}
+.step.cur i{border-color:var(--color-accent);background:var(--color-accent-200)}
+.step.fail i{background:#9a4420;border-color:#9a4420}
+.table td{vertical-align:top}
+.table.dense td,.table.dense th{padding:6px 8px;font-size:13px}
+.table th{text-align:start}
+.stat{padding:16px;border-inline-end:1px solid var(--color-divider)}
+.stat:last-child{border-inline-end:0}
+.stat .n{font:800 40px/1.1 var(--font-heading)}
+.node{border:1px solid var(--color-divider);background:var(--color-surface);padding:10px 12px;min-width:170px;font-size:13px}
+.node.gate{border-color:var(--color-accent);border-width:2px}
+.node .k{display:block;margin-bottom:2px}
+.arrow{width:36px;height:2px;background:var(--color-divider);align-self:center;flex:none;position:relative}
+.arrow::after{content:"";position:absolute;inset-inline-end:-1px;top:-4px;border:5px solid transparent;border-inline-start-color:var(--color-divider)}
+.ev{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--color-divider);font-size:13px}
+.ev .t{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--color-neutral-600);direction:ltr}
+.tabs{display:flex;border-bottom:2px solid var(--color-divider)}
+.tabs a{padding:10px 16px;font-size:13px;color:inherit;text-decoration:none;margin-bottom:-2px;border-bottom:2px solid transparent}
+.tabs a[aria-current="page"]{border-bottom-color:var(--color-accent);font-weight:600}
+.ok{color:#2f6f3f;font-weight:600}.warn{color:#8a5d10;font-weight:600}.err{color:#9a4420;font-weight:600}
+</style>
+</helmet>
+
+<div data-theme="{{ theme }}" data-lang="{{ lang }}" dir="{{ dir }}">
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">DAS — Document &amp; Archiving System · نظام الوثائق والأرشفة · 12 bilingual screens</span></div>
+<div class="dv-note">
+<b>Basis.</b> Screens derived from the DAS solution architecture (DAS-SA-ME-01): the §03 metadata schema, §04 ingestion pipeline, §05 swimlane and workflow list, §06 interface table, §09 governance prerequisites. Modernist grid, ADPF green as the single accent.<br>
+<b>Multilingual.</b> Every label carries English and Arabic. Use the <b>Language</b> tweak to view English only, Arabic only (the whole UI mirrors to RTL), or both stacked as shown now. Codes, dates and identifiers stay LTR in every mode.<br>
+<b>Field legend.</b> <span class="req">*</span> mandatory before an item can leave Drop-off · <span class="opt">optional</span> · <span class="sys">system</span> never typed by a user. Confidentiality: <span class="pill p-open">Open · عام</span> <span class="pill p-sens">Sensitive · حساس</span> <span class="pill p-conf">Confidential · سري</span> <span class="pill p-secr">Secret · سري للغاية</span>.
+</div>
+<div class="dv-opts">
+
+<!-- ═══════════ 1a DASHBOARD ═══════════ -->
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Landing portal · /sites/das — role-aware home</div>
+<div class="dv-card" data-screen-label="1a Dashboard">
+<div class="nav">
+<div style="display:flex;align-items:center;gap:12px;margin-inline-end:auto"><img src="uploads/adpf-logo.png" alt="Abu Dhabi Pension Fund" style="height:40px;width:auto"><span style="width:1px;height:28px;background:var(--color-divider)"></span><span class="nav-brand" style="margin:0">DAS</span><span class="k"><i lang="en">Document &amp; Archiving</i><i lang="ar">الوثائق والأرشفة</i></span></div>
+<a href="#1a" aria-current="page"><i lang="en">Home</i><i lang="ar">الرئيسية</i></a><a href="#1b"><i lang="en">Capture</i><i lang="ar">الالتقاط</i></a><a href="#1e"><i lang="en">Approvals</i><i lang="ar">الاعتمادات</i></a><a href="#1h"><i lang="en">Search</i><i lang="ar">البحث</i></a><a href="#1f"><i lang="en">Records</i><i lang="ar">السجلات</i></a><a href="#1j"><i lang="en">Integration</i><i lang="ar">التكامل</i></a><a href="#1k"><i lang="en">Admin</i><i lang="ar">الإدارة</i></a>
+<span class="seg"><label class="seg-opt"><input type="radio" name="lang1" checked><span>EN</span></label><label class="seg-opt"><input type="radio" name="lang1"><span>عربي</span></label></span>
+<div style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="width:28px;height:28px;background:var(--color-accent-800);color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px">MA</span><span><i lang="en">Maryam A. · IT Division</i><i lang="ar">مريم أ. · إدارة تقنية المعلومات</i></span></div>
+</div>
+<div style="display:grid;grid-template-columns:230px 1fr;min-height:740px">
+<nav class="side" style="border-inline-end:2px solid var(--color-divider);padding:12px 0">
+<div class="k" style="padding:6px 14px"><i lang="en">My work</i><i lang="ar">أعمالي</i></div>
+<a href="#1a" aria-current="page"><span><i lang="en">Overview</i><i lang="ar">نظرة عامة</i></span></a>
+<a href="#1e"><span><i lang="en">My approvals</i><i lang="ar">اعتماداتي</i></span><b style="color:var(--color-accent-700)">7</b></a>
+<a href="#1b"><span><i lang="en">Drafts in Drop-off</i><i lang="ar">مسودات في الاستلام</i></span><b>3</b></a>
+<a href="#1c"><span><i lang="en">Returned to me</i><i lang="ar">معاد إليّ</i></span><b style="color:#9a4420">1</b></a>
+<div class="k" style="padding:16px 14px 6px"><i lang="en">Division · IT</i><i lang="ar">الإدارة · تقنية المعلومات</i></div>
+<a href="#1i"><span><i lang="en">Policies &amp; Delegations</i><i lang="ar">السياسات والتفويضات</i></span></a><a href="#1i"><span><i lang="en">Contracts &amp; SLAs</i><i lang="ar">العقود واتفاقيات الخدمة</i></span></a><a href="#1i"><span><i lang="en">Correspondence</i><i lang="ar">المراسلات</i></span></a><a href="#1i"><span><i lang="en">Projects</i><i lang="ar">المشاريع</i></span></a>
+<div class="k" style="padding:16px 14px 6px"><i lang="en">Archive</i><i lang="ar">الأرشيف</i></div>
+<a href="#1f"><span><i lang="en">Archive Centre</i><i lang="ar">مركز الأرشيف</i></span></a><a href="#1g"><span><i lang="en">Disposition</i><i lang="ar">التصرف النهائي</i></span></a><a href="#1l"><span><i lang="en">Legal holds</i><i lang="ar">الحجز القانوني</i></span></a>
+</nav>
+<main style="padding:24px 28px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:flex-end;gap:16px"><div><h2 style="margin:0"><i lang="en">Good morning, Maryam</i><i lang="ar">صباح الخير، مريم</i></h2><div class="text-muted" style="font-size:13px"><i lang="en">Sunday 28 Sep 2026 · Support Services ▸ Information Technology</i><i lang="ar">الأحد 28 سبتمبر 2026 · الخدمات المساندة ◂ تقنية المعلومات</i></div></div>
+<div style="margin-inline-start:auto;display:flex;gap:8px"><a class="btn btn-secondary" href="#1h"><i lang="en">Search the archive</i><i lang="ar">البحث في الأرشيف</i></a><a class="btn btn-primary" href="#1b"><i lang="en">Upload or scan</i><i lang="ar">رفع أو مسح ضوئي</i></a></div></div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider)">
+<div class="stat"><div class="k"><i lang="en">Awaiting my approval</i><i lang="ar">بانتظار اعتمادي</i></div><div class="n">7</div><div style="font-size:12px" class="text-muted"><i lang="en">2 breach SLA in &lt; 4 h</i><i lang="ar">2 تتجاوز مستوى الخدمة خلال أقل من 4 ساعات</i></div></div>
+<div class="stat"><div class="k"><i lang="en">In Drop-off · not yet records</i><i lang="ar">في الاستلام · ليست سجلات بعد</i></div><div class="n">3</div><div style="font-size:12px" class="text-muted"><i lang="en">1 below classification confidence</i><i lang="ar">1 دون حد ثقة التصنيف</i></div></div>
+<div class="stat"><div class="k"><i lang="en">Filed by my division · 30 d</i><i lang="ar">مؤرشف من إدارتي · 30 يوماً</i></div><div class="n">412</div><div style="font-size:12px" class="text-muted"><i lang="en">94% auto-classified</i><i lang="ar">94٪ تصنيف تلقائي</i></div></div>
+<div class="stat"><div class="k"><i lang="en">Retention gates due · 90 d</i><i lang="ar">بوابات الاحتفاظ المستحقة · 90 يوماً</i></div><div class="n">58</div><div style="font-size:12px" class="text-muted"><i lang="en">Gate 1: 51 · Gate 2: 7</i><i lang="ar">البوابة 1: 51 · البوابة 2: 7</i></div></div>
+</div>
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:24px">
+<div>
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px"><h5 style="margin:0"><i lang="en">Tasks</i><i lang="ar">المهام</i></h5><a href="#1e" style="font-size:12px"><i lang="en">All approvals →</i><i lang="ar">كل الاعتمادات ←</i></a></div>
+<table class="table dense">
+<thead><tr><th><i lang="en">Task</i><i lang="ar">المهمة</i></th><th><i lang="en">Document</i><i lang="ar">الوثيقة</i></th><th><i lang="en">From</i><i lang="ar">من</i></th><th><i lang="en">Due</i><i lang="ar">الاستحقاق</i></th><th></th></tr></thead>
+<tbody>
+<tr><td><i lang="en">Approve</i><i lang="ar">اعتماد</i></td><td><span class="mono">SS-IT-PY-02-R4</span><br><span class="text-muted"><i lang="en">Information Security Policy — Issue 4</i><i lang="ar">سياسة أمن المعلومات — الإصدار 4</i></span></td><td><i lang="en">K. Al Mazrouei</i><i lang="ar">خ. المزروعي</i></td><td class="err">3h 40m</td><td><a class="btn btn-ghost" href="#1c"><i lang="en">Open</i><i lang="ar">فتح</i></a></td></tr>
+<tr><td><i lang="en">Approve</i><i lang="ar">اعتماد</i></td><td><span class="mono">SS-IT-CR-118</span><br><span class="text-muted"><i lang="en">Contract renewal — network maintenance</i><i lang="ar">تجديد عقد — صيانة الشبكة</i></span></td><td><i lang="en">S. Hassan</i><i lang="ar">س. حسن</i></td><td><i lang="en">Tomorrow</i><i lang="ar">غداً</i></td><td><a class="btn btn-ghost" href="#1c"><i lang="en">Open</i><i lang="ar">فتح</i></a></td></tr>
+<tr><td><i lang="en">Classify</i><i lang="ar">تصنيف</i></td><td><span class="mono">drop-off #4471</span><br><span class="text-muted"><i lang="en">Scanned letter · confidence 0.61</i><i lang="ar">رسالة ممسوحة · ثقة 0.61</i></span></td><td>SS-02</td><td><i lang="en">2 d</i><i lang="ar">يومان</i></td><td><a class="btn btn-ghost" href="#1b"><i lang="en">Open</i><i lang="ar">فتح</i></a></td></tr>
+<tr><td><i lang="en">Confirm share</i><i lang="ar">تأكيد مشاركة</i></td><td><span class="mono">SS-IT-RE-041</span><br><span class="text-muted"><i lang="en">External sharing · Vendor X</i><i lang="ar">مشاركة خارجية · المورد X</i></span></td><td><i lang="en">A. Al Ketbi</i><i lang="ar">أ. الكتبي</i></td><td><i lang="en">3 d</i><i lang="ar">3 أيام</i></td><td><a class="btn btn-ghost" href="#1l"><i lang="en">Open</i><i lang="ar">فتح</i></a></td></tr>
+</tbody></table>
+</div>
+<div>
+<h5 style="margin:0 0 8px"><i lang="en">Recently filed</i><i lang="ar">أُرشف مؤخراً</i></h5>
+<a href="#1i" style="display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 0;border-bottom:1px solid var(--color-divider);color:inherit;text-decoration:none"><span><span class="mono">SS-IT-ME-207</span> · <i lang="en">CAB meeting minutes</i><i lang="ar">محضر لجنة التغيير</i><br><span class="text-muted" style="font-size:12px"><i lang="en">2 h ago · Policies &amp; Delegations</i><i lang="ar">قبل ساعتين · السياسات والتفويضات</i></span></span><span class="pill p-sens"><i lang="en">Sensitive</i><i lang="ar">حساس</i></span></a>
+<a href="#1i" style="display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 0;border-bottom:1px solid var(--color-divider);color:inherit;text-decoration:none"><span><span class="mono">SS-IT-DE-033</span> · <i lang="en">Delegation letter — procurement</i><i lang="ar">كتاب تفويض — المشتريات</i><br><span class="text-muted" style="font-size:12px"><i lang="en">yesterday</i><i lang="ar">أمس</i></span></span><span class="pill p-conf"><i lang="en">Confidential</i><i lang="ar">سري</i></span></a>
+<a href="#1i" style="display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 0;border-bottom:1px solid var(--color-divider);color:inherit;text-decoration:none"><span><span class="mono">SS-IT-RE-040</span> · <i lang="en">Incident report — Q3</i><i lang="ar">تقرير حوادث — الربع الثالث</i><br><span class="text-muted" style="font-size:12px"><i lang="en">yesterday</i><i lang="ar">أمس</i></span></span><span class="pill p-open"><i lang="en">Open</i><i lang="ar">عام</i></span></a>
+<div style="margin-top:20px;padding:14px;background:var(--color-surface)"><div class="k" style="margin-bottom:6px"><i lang="en">Platform notice</i><i lang="ar">إشعار النظام</i></div><div style="font-size:13px"><i lang="en">Retention plan v2026.2 submitted to the National Archives on 14 Sep. 12 series affected; old rules remain in force until publication.</i><i lang="ar">قُدمت خطة الاحتفاظ v2026.2 إلى الأرشيف الوطني في 14 سبتمبر. 12 سلسلة متأثرة؛ تبقى القواعد القديمة سارية حتى النشر.</i> <a href="#1k"><i lang="en">View change</i><i lang="ar">عرض التغيير</i></a></div></div>
+</div></div>
+</main></div>
+</div></div>
+
+<!-- ═══════════ 1b DROP-OFF FORM ═══════════ -->
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Capture · Drop-off indexing form — full core metadata schema, pipeline state, proposed index</div>
+<div class="dv-card" data-screen-label="1b Drop-off form">
+<div class="nav"><div style="display:flex;align-items:center;gap:12px;margin-inline-end:auto"><img src="uploads/adpf-logo.png" alt="ADPF" style="height:40px"><span style="width:1px;height:28px;background:var(--color-divider)"></span><span class="nav-brand" style="margin:0">DAS</span></div><a href="#1a"><i lang="en">Home</i><i lang="ar">الرئيسية</i></a><a href="#1b" aria-current="page"><i lang="en">Capture</i><i lang="ar">الالتقاط</i></a><a href="#1e"><i lang="en">Approvals</i><i lang="ar">الاعتمادات</i></a><a href="#1h"><i lang="en">Search</i><i lang="ar">البحث</i></a><a href="#1f"><i lang="en">Records</i><i lang="ar">السجلات</i></a><a href="#1j"><i lang="en">Integration</i><i lang="ar">التكامل</i></a><a href="#1k"><i lang="en">Admin</i><i lang="ar">الإدارة</i></a></div>
+<div style="padding:20px 28px 16px;display:flex;align-items:flex-end;gap:16px;border-bottom:2px solid var(--color-divider)">
+<div><div class="k"><i lang="en">Drop-off · item #4470 · not yet a record</i><i lang="ar">الاستلام · عنصر #4470 · ليس سجلاً بعد</i></div><h3 style="margin:2px 0 0"><i lang="en">Index and declare</i><i lang="ar">الفهرسة والإعلان</i></h3></div>
+<div style="margin-inline-start:auto;display:flex;gap:22px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+<div class="step done"><i></i><i lang="en">Arrived · scan SS-02</i><i lang="ar">وصل · ماسح SS-02</i></div><div class="step done"><i></i><i lang="en">AV clean</i><i lang="ar">خالٍ من البرمجيات الخبيثة</i></div><div class="step done"><i></i>OCR · PDF/A-2b</div><div class="step done"><i></i><i lang="en">Extraction</i><i lang="ar">الاستخلاص</i></div><div class="step cur"><i></i><i lang="en">Proposal 0.92</i><i lang="ar">اقتراح 0.92</i></div><div class="step"><i></i><i lang="en">Human confirmation</i><i lang="ar">تأكيد بشري</i></div><div class="step"><i></i><i lang="en">Code · route · declare</i><i lang="ar">ترميز · توجيه · إعلان</i></div>
+</div></div>
+<div style="display:grid;grid-template-columns:400px 1fr">
+<div style="border-inline-end:2px solid var(--color-divider);padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="k"><i lang="en">Preview · Office Online Server</i><i lang="ar">معاينة</i></span><span class="seg"><label class="seg-opt"><input type="radio" name="pv" checked><span>PDF/A</span></label><label class="seg-opt"><input type="radio" name="pv"><span><i lang="en">Original</i><i lang="ar">الأصل</i></span></label></span></div>
+<div style="aspect-ratio:1/1.25;background:#fff;border:1px solid var(--color-divider);padding:24px;display:flex;flex-direction:column;gap:10px;color:var(--color-neutral-500)"><div style="height:10px;width:40%;background:var(--color-neutral-300)"></div><div style="height:10px;width:70%;background:var(--color-neutral-200)"></div><div style="height:10px;width:65%;background:var(--color-neutral-200)"></div><div style="height:10px;width:72%;background:var(--color-neutral-200)"></div><div style="flex:1"></div><div style="font-size:12px"><i lang="en">Page 1 of 14 · OCR 0.97 · low-confidence pages flagged: 9, 12</i><i lang="ar">صفحة 1 من 14 · OCR 0.97 · صفحات منخفضة الثقة: 9، 12</i></div></div>
+<div style="font-size:12px" class="text-muted"><i lang="en">Extracted: date 21/09/2026 · ref. 2026/IT/0871 · correspondent "Emirates Data Centre" · 3 entities</i><i lang="ar">مستخلص: التاريخ 21/09/2026 · المرجع 2026/IT/0871 · المراسل "مركز بيانات الإمارات" · 3 كيانات</i></div>
+<div style="padding:12px;background:var(--color-accent-100);border-top:2px solid var(--color-accent)"><div class="k" style="color:var(--color-accent-800)"><i lang="en">Proposed index · rule R-0214 matched</i><i lang="ar">فهرس مقترح · تطابقت القاعدة R-0214</i></div><div style="font-size:13px;margin-top:4px"><i lang="en">Sector SS · Division IT · Type Policy · Series IT-04 · Sensitive. Confirm or change on the right. Below 0.75 this item would have been routed to you as a classification exception.</i><i lang="ar">القطاع SS · الإدارة IT · النوع سياسة · السلسلة IT-04 · حساس. أكّد أو عدّل في النموذج. دون 0.75 كان سيُحال إليك كاستثناء تصنيف.</i></div></div>
+</div>
+<div style="padding:20px 28px;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;align-content:start">
+<h6 style="grid-column:1/-1;margin:4px 0 0"><i lang="en">Identity</i><i lang="ar">الهوية</i></h6>
+<div class="field"><label>Title (EN)<span class="req">*</span></label><input class="input" value="Information Security Policy — Issue 4"></div>
+<div class="field"><label>العنوان (AR)<span class="req">*</span></label><input class="input" dir="rtl" value="سياسة أمن المعلومات — الإصدار الرابع"></div>
+<div class="field"><label><i lang="en">Document code</i><i lang="ar">رمز الوثيقة</i><span class="sys">system · ID provider</span></label><div class="input mono" style="display:flex;align-items:center;gap:10px;background:var(--color-neutral-200)">SS-IT-PY-<b>02</b>-R4</div><div class="text-muted" style="font-size:11px;margin-top:3px"><i lang="en">Serial reserved on declare; gaps logged, never reused.</i><i lang="ar">يُحجز الرقم التسلسلي عند الإعلان؛ تُسجَّل الفجوات ولا يُعاد استخدامها.</i></div></div>
+<div class="field"><label><i lang="en">Document type</i><i lang="ar">نوع الوثيقة</i><span class="req">*</span></label><select class="input"><option>PY · Policy · سياسة</option><option>ME · Minutes · محضر</option><option>CR · Contract · عقد</option><option>DE · Delegation · تفويض</option><option>RE · Report · تقرير</option><option>F## · Form · نموذج</option></select></div>
+<div class="field"><label><i lang="en">Language</i><i lang="ar">اللغة</i><span class="req">*</span></label><span class="seg"><label class="seg-opt"><input type="radio" name="lg"><span>AR</span></label><label class="seg-opt"><input type="radio" name="lg"><span>EN</span></label><label class="seg-opt"><input type="radio" name="lg" checked><span><i lang="en">Bilingual</i><i lang="ar">ثنائي</i></span></label></span></div>
+<div class="field"><label><i lang="en">Date of issue</i><i lang="ar">تاريخ الإصدار</i><span class="req">*</span></label><input class="input" value="21/09/2026"></div>
+<h6 style="grid-column:1/-1;margin:10px 0 0"><i lang="en">Classification</i><i lang="ar">التصنيف</i></h6>
+<div class="field"><label><i lang="en">Sector</i><i lang="ar">القطاع</i><span class="req">*</span></label><select class="input"><option>SS · Support Services · الخدمات المساندة</option></select></div>
+<div class="field"><label><i lang="en">Division</i><i lang="ar">الإدارة</i><span class="req">*</span></label><select class="input"><option>IT · Information Technology · تقنية المعلومات</option></select></div>
+<div class="field" style="grid-column:1/-1"><label><i lang="en">Function → Activity → Process</i><i lang="ar">الوظيفة ← النشاط ← العملية</i><span class="req">*</span> <span class="text-muted">— <i lang="en">classification term set</i><i lang="ar">مجموعة مصطلحات التصنيف</i></span></label><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><select class="input"><option>F03 · Governance &amp; compliance · الحوكمة والامتثال</option></select><select class="input"><option>F03.2 · Policy management · إدارة السياسات</option></select><select class="input"><option>F03.2.1 · Issue &amp; review · الإصدار والمراجعة</option></select></div></div>
+<div class="field"><label><i lang="en">Record series</i><i lang="ar">سلسلة السجلات</i><span class="req">*</span> <span class="text-muted">— <i lang="en">selects retention rule</i><i lang="ar">تحدد قاعدة الاحتفاظ</i></span></label><select class="input"><option>IT-04 · Information security policies · سياسات أمن المعلومات</option></select></div>
+<div class="field"><label><i lang="en">Confidentiality</i><i lang="ar">السرية</i><span class="req">*</span> <span class="text-muted">— <i lang="en">set by Information Owner</i><i lang="ar">يحددها مالك المعلومات</i></span></label><span class="seg"><label class="seg-opt"><input type="radio" name="cf"><span><i lang="en">Open</i><i lang="ar">عام</i></span></label><label class="seg-opt"><input type="radio" name="cf" checked><span><i lang="en">Sensitive</i><i lang="ar">حساس</i></span></label><label class="seg-opt"><input type="radio" name="cf"><span><i lang="en">Confidential</i><i lang="ar">سري</i></span></label><label class="seg-opt"><input type="radio" name="cf"><span><i lang="en">Secret</i><i lang="ar">سري للغاية</i></span></label></span></div>
+<div class="field"><label><i lang="en">Information Owner</i><i lang="ar">مالك المعلومات</i><span class="req">*</span></label><input class="input" value="Khalid Al Mazrouei · Head of IT · خالد المزروعي"></div>
+<div class="field"><label><i lang="en">Vitality</i><i lang="ar">الحيوية</i><span class="req">*</span></label><span class="seg"><label class="seg-opt"><input type="radio" name="vt" checked><span><i lang="en">Vital</i><i lang="ar">حيوي</i></span></label><label class="seg-opt"><input type="radio" name="vt"><span><i lang="en">Normal</i><i lang="ar">عادي</i></span></label></span></div>
+<div class="field"><label><i lang="en">Media form</i><i lang="ar">شكل الوسيط</i><span class="req">*</span></label><span class="seg"><label class="seg-opt"><input type="radio" name="md" checked><span><i lang="en">Electronic</i><i lang="ar">إلكتروني</i></span></label><label class="seg-opt"><input type="radio" name="md"><span><i lang="en">Paper</i><i lang="ar">ورقي</i></span></label><label class="seg-opt"><input type="radio" name="md"><span><i lang="en">Hybrid</i><i lang="ar">مختلط</i></span></label></span></div>
+<div class="field"><label><i lang="en">Physical location</i><i lang="ar">الموقع الفعلي</i><span class="opt">optional · paper / hybrid only</span></label><input class="input" placeholder="Room · cabinet · box"></div>
+<h6 style="grid-column:1/-1;margin:10px 0 0"><i lang="en">Retention — bound from series IT-04</i><i lang="ar">الاحتفاظ — مرتبط بالسلسلة IT-04</i><span class="sys">system · register</span></h6>
+<div style="grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)">
+<div class="stat" style="padding:10px 12px"><div class="k"><i lang="en">Active (yrs)</i><i lang="ar">جارية (سنوات)</i></div><div style="font:800 22px var(--font-heading)">5</div></div><div class="stat" style="padding:10px 12px"><div class="k"><i lang="en">Archive (yrs)</i><i lang="ar">وسيطة (سنوات)</i></div><div style="font:800 22px var(--font-heading)">10</div></div><div class="stat" style="padding:10px 12px"><div class="k"><i lang="en">Final disposition</i><i lang="ar">التصرف النهائي</i></div><div style="font:800 15px var(--font-heading);margin-top:5px"><i lang="en">Permanent</i><i lang="ar">دائم</i></div></div><div class="stat" style="padding:10px 12px"><div class="k"><i lang="en">Date archived</i><i lang="ar">تاريخ الأرشفة</i></div><div style="font-size:13px;margin-top:6px" class="text-muted"><i lang="en">stamped on declare</i><i lang="ar">يُختم عند الإعلان</i></div></div>
+</div>
+<h6 style="grid-column:1/-1;margin:10px 0 0"><i lang="en">Relations</i><i lang="ar">الارتباطات</i></h6>
+<div class="field"><label><i lang="en">Supersedes</i><i lang="ar">يحل محل</i><span class="opt">optional</span></label><input class="input mono" value="SS-IT-PY-02-R3"></div>
+<div class="field"><label><i lang="en">ERP reference</i><i lang="ar">مرجع نظام الموارد</i><span class="opt">optional · link, not copy</span></label><input class="input" placeholder="Oracle contract / PO / invoice no."></div>
+<div class="field"><label><i lang="en">Correspondent</i><i lang="ar">المراسل</i><span class="opt">optional · extracted</span></label><input class="input" value="Emirates Data Centre"></div>
+<div class="field"><label><i lang="en">Keywords</i><i lang="ar">الكلمات المفتاحية</i><span class="opt">optional</span></label><input class="input" value="ISO 27001, access control, الأمن"></div>
+<div class="field" style="grid-column:1/-1"><label><i lang="en">Notes to reviewer</i><i lang="ar">ملاحظات للمراجع</i><span class="opt">optional</span></label><textarea class="input" style="min-height:60px"></textarea></div>
+<div style="grid-column:1/-1;display:flex;gap:8px;align-items:center;padding-top:8px;border-top:2px solid var(--color-divider);margin-top:6px">
+<span style="font-size:12px" class="text-muted"><i lang="en">Route on submit: Document approval · 2 steps from the delegation matrix (Head of IT → Information Owner)</i><i lang="ar">المسار عند الإرسال: اعتماد الوثيقة · خطوتان من مصفوفة التفويض</i></span>
+<span style="margin-inline-start:auto"></span><a class="btn btn-ghost" href="#1b"><i lang="en">Save draft</i><i lang="ar">حفظ مسودة</i></a><a class="btn btn-secondary" href="#1b"><i lang="en">Return to scanner</i><i lang="ar">إعادة للماسح</i></a><a class="btn btn-primary" href="#1c"><i lang="en">Confirm index &amp; submit</i><i lang="ar">تأكيد الفهرس وإرسال</i></a></div>
+</div></div>
+</div></div>
+
+<!-- ═══════════ 1c APPROVAL TASK ═══════════ -->
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Approval task · reviewer view — K2 task, route, decision with reasons, return-to-originator loop</div>
+<div class="dv-card" data-screen-label="1c Approval task">
+<div class="nav"><div style="display:flex;align-items:center;gap:12px;margin-inline-end:auto"><img src="uploads/adpf-logo.png" alt="ADPF" style="height:40px"><span style="width:1px;height:28px;background:var(--color-divider)"></span><span class="nav-brand" style="margin:0">DAS</span></div><a href="#1a"><i lang="en">Home</i><i lang="ar">الرئيسية</i></a><a href="#1b"><i lang="en">Capture</i><i lang="ar">الالتقاط</i></a><a href="#1e" aria-current="page"><i lang="en">Approvals</i><i lang="ar">الاعتمادات</i></a><a href="#1h"><i lang="en">Search</i><i lang="ar">البحث</i></a><a href="#1f"><i lang="en">Records</i><i lang="ar">السجلات</i></a><a href="#1j"><i lang="en">Integration</i><i lang="ar">التكامل</i></a><a href="#1k"><i lang="en">Admin</i><i lang="ar">الإدارة</i></a></div>
+<div style="padding:20px 28px;display:grid;grid-template-columns:1fr 380px;gap:28px">
+<div>
+<div class="k"><i lang="en">Task K2-88213 · Document approval · step 1 of 2</i><i lang="ar">مهمة K2-88213 · اعتماد وثيقة · الخطوة 1 من 2</i></div>
+<h3 style="margin:2px 0 4px"><i lang="en">Information Security Policy — Issue 4</i><i lang="ar">سياسة أمن المعلومات — الإصدار الرابع</i></h3>
+<div style="display:flex;gap:10px;align-items:center;font-size:13px;flex-wrap:wrap"><span class="mono">SS-IT-PY-02-R4</span><span class="pill p-sens"><i lang="en">Sensitive</i><i lang="ar">حساس</i></span><span class="tag tag-accent"><i lang="en">Vital</i><i lang="ar">حيوي</i></span><span class="text-muted"><i lang="en">Submitted by Maryam A. · 28 Sep 09:14 · due in 3h 40m</i><i lang="ar">أرسلتها مريم أ. · 28 سبتمبر 09:14 · متبقٍ 3 س 40 د</i></span></div>
+<div class="hr"></div>
+<h6><i lang="en">Route — from delegation-of-authority matrix DoA-2026 §4.2</i><i lang="ar">المسار — من مصفوفة التفويض DoA-2026 §4.2</i></h6>
+<div style="display:flex;gap:0;align-items:stretch;margin:8px 0 18px">
+<div class="node" style="border-color:var(--color-accent);background:var(--color-accent-100)"><span class="k"><i lang="en">Originator</i><i lang="ar">المنشئ</i></span>Maryam A.<br><span class="text-muted" style="font-size:11px"><i lang="en">submitted 09:14</i><i lang="ar">أُرسل 09:14</i></span></div><div class="arrow"></div>
+<div class="node gate"><span class="k"><i lang="en">Step 1 · you</i><i lang="ar">الخطوة 1 · أنت</i></span><i lang="en">Head of IT</i><i lang="ar">رئيس تقنية المعلومات</i><br><span class="text-muted" style="font-size:11px"><i lang="en">serial · SLA 8 h</i><i lang="ar">تسلسلي · 8 ساعات</i></span></div><div class="arrow"></div>
+<div class="node"><span class="k"><i lang="en">Step 2</i><i lang="ar">الخطوة 2</i></span><i lang="en">Information Owner</i><i lang="ar">مالك المعلومات</i><br><span class="text-muted" style="font-size:11px"><i lang="en">K. Al Mazrouei · 24 h</i><i lang="ar">خ. المزروعي · 24 ساعة</i></span></div><div class="arrow"></div>
+<div class="node" style="border-style:dashed"><span class="k"><i lang="en">On approve</i><i lang="ar">عند الاعتماد</i></span><i lang="en">Code · file · declare</i><i lang="ar">ترميز · أرشفة · إعلان</i><br><span class="text-muted" style="font-size:11px"><i lang="en">Content Organizer</i><i lang="ar">موجّه المحتوى</i></span></div>
+</div>
+<h6><i lang="en">Index to verify</i><i lang="ar">الفهرس للتحقق</i></h6>
+<table class="table dense"><tbody>
+<tr><td style="width:220px" class="text-muted"><i lang="en">Series</i><i lang="ar">السلسلة</i></td><td>IT-04 · <i lang="en">Information security policies</i><i lang="ar">سياسات أمن المعلومات</i></td><td style="width:120px"><span class="ok">✓ <i lang="en">rule match</i><i lang="ar">مطابق</i></span></td></tr>
+<tr><td class="text-muted"><i lang="en">Function / Activity / Process</i><i lang="ar">الوظيفة / النشاط / العملية</i></td><td>F03 › F03.2 › F03.2.1</td><td><span class="ok">✓</span></td></tr>
+<tr><td class="text-muted"><i lang="en">Confidentiality</i><i lang="ar">السرية</i></td><td><i lang="en">Sensitive — proposed Sensitive</i><i lang="ar">حساس — المقترح حساس</i></td><td><span class="ok">✓</span></td></tr>
+<tr><td class="text-muted"><i lang="en">Retention</i><i lang="ar">الاحتفاظ</i></td><td><i lang="en">5 y active → 10 y archive → Permanent</i><i lang="ar">5 س جارية ← 10 س وسيطة ← دائم</i></td><td><span class="ok">✓</span></td></tr>
+<tr><td class="text-muted"><i lang="en">Supersedes</i><i lang="ar">يحل محل</i></td><td><span class="mono">SS-IT-PY-02-R3</span> · <i lang="en">will be marked superseded on declare</i><i lang="ar">سيُعلَّم كمُلغى عند الإعلان</i></td><td><span class="warn">! <i lang="en">check</i><i lang="ar">تحقق</i></span></td></tr>
+<tr><td class="text-muted"><i lang="en">OCR quality</i><i lang="ar">جودة OCR</i></td><td><i lang="en">2 low-confidence pages (9, 12) — re-scan requested from SS-02</i><i lang="ar">صفحتان منخفضتا الثقة (9، 12) — طُلبت إعادة المسح</i></td><td><span class="warn">!</span></td></tr>
+</tbody></table>
+<h6 style="margin-top:20px"><i lang="en">Decision</i><i lang="ar">القرار</i></h6>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px">
+<div class="field" style="grid-column:1/-1"><label><i lang="en">Outcome</i><i lang="ar">النتيجة</i><span class="req">*</span></label><span class="seg"><label class="seg-opt"><input type="radio" name="dc" checked><span><i lang="en">Approve</i><i lang="ar">اعتماد</i></span></label><label class="seg-opt"><input type="radio" name="dc"><span><i lang="en">Approve with changes to index</i><i lang="ar">اعتماد مع تعديل الفهرس</i></span></label><label class="seg-opt"><input type="radio" name="dc"><span><i lang="en">Return to originator</i><i lang="ar">إعادة للمنشئ</i></span></label><label class="seg-opt"><input type="radio" name="dc"><span><i lang="en">Reject</i><i lang="ar">رفض</i></span></label></span></div>
+<div class="field"><label><i lang="en">Reason code</i><i lang="ar">رمز السبب</i><span class="req">*</span> <span class="text-muted">— <i lang="en">mandatory on return / reject</i><i lang="ar">إلزامي عند الإعادة أو الرفض</i></span></label><select class="input"><option>— </option><option>Wrong series · سلسلة خاطئة</option><option>Confidentiality too low · سرية منخفضة</option><option>Missing pages · صفحات ناقصة</option><option>Duplicate of existing record · مكرر</option></select></div>
+<div class="field"><label><i lang="en">Delegate to</i><i lang="ar">تفويض إلى</i><span class="opt">optional · within DoA</span></label><input class="input" placeholder="Search people…"></div>
+<div class="field" style="grid-column:1/-1"><label><i lang="en">Comment</i><i lang="ar">تعليق</i><span class="opt">optional · visible to originator</span></label><textarea class="input" style="min-height:64px"></textarea></div>
+</div>
+<div style="display:flex;gap:8px;padding-top:12px;border-top:2px solid var(--color-divider);margin-top:14px"><span class="text-muted" style="font-size:12px;align-self:center"><i lang="en">Your decision is written to K2 and to the audit warehouse; the DMS stores the outcome, not the process.</i><i lang="ar">يُسجَّل قرارك في K2 وفي مستودع التدقيق.</i></span><span style="margin-inline-start:auto"></span><a class="btn btn-secondary" href="#1e"><i lang="en">Save &amp; next task</i><i lang="ar">حفظ والمهمة التالية</i></a><a class="btn btn-primary" href="#1e"><i lang="en">Submit decision</i><i lang="ar">إرسال القرار</i></a></div>
+</div>
+<aside style="display:flex;flex-direction:column;gap:14px">
+<div style="aspect-ratio:1/1.1;background:#fff;border:1px solid var(--color-divider);padding:20px;color:var(--color-neutral-500);font-size:12px;display:flex;flex-direction:column"><div style="height:8px;width:45%;background:var(--color-neutral-300);margin-bottom:8px"></div><div style="height:8px;width:75%;background:var(--color-neutral-200);margin-bottom:8px"></div><div style="height:8px;width:66%;background:var(--color-neutral-200)"></div><div style="flex:1"></div><i lang="en">Preview only · watermark: K2-88213 · download logged</i><i lang="ar">معاينة فقط · علامة مائية · يُسجَّل التنزيل</i></div>
+<div><h6><i lang="en">History</i><i lang="ar">السجل</i></h6>
+<div class="ev"><span class="t">28-09 09:14</span><span><i lang="en">Submitted by Maryam A. — index confirmed</i><i lang="ar">أرسلتها مريم أ. — تم تأكيد الفهرس</i></span></div>
+<div class="ev"><span class="t">28-09 09:14</span><span><i lang="en">Route resolved: DoA-2026 §4.2 · 2 serial steps</i><i lang="ar">تم حل المسار: DoA-2026 §4.2 · خطوتان</i></span></div>
+<div class="ev"><span class="t">28-09 09:15</span><span><i lang="en">Task assigned to Head of IT · SLA 8 h</i><i lang="ar">أُسندت المهمة لرئيس تقنية المعلومات · 8 ساعات</i></span></div>
+<div class="ev"><span class="t">27-09 16:02</span><span><i lang="en">Previous submission returned: "missing Arabic title"</i><i lang="ar">أُعيد الإرسال السابق: "العنوان العربي مفقود"</i></span></div>
+</div>
+<div style="padding:12px;background:var(--color-surface);font-size:12px"><div class="k" style="margin-bottom:4px"><i lang="en">Escalation</i><i lang="ar">التصعيد</i></div><i lang="en">If no decision by 17:15 the task escalates to the Sector Director per DoA §4.5 and a reminder is sent every 2 h.</i><i lang="ar">إن لم يُتخذ قرار بحلول 17:15 تُصعَّد المهمة إلى مدير القطاع وفق DoA §4.5.</i></div>
+</aside></div>
+</div></div>
+
+<!-- ═══════════ 1d WORKFLOW DESIGNER ═══════════ -->
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Dynamic approval designer · admin — routes derived from the delegation matrix, with conditions, parallel steps, SLAs and escalation</div>
+<div class="dv-card" data-screen-label="1d Workflow designer">
+<div class="nav"><div style="display:flex;align-items:center;gap:12px;margin-inline-end:auto"><img src="uploads/adpf-logo.png" alt="ADPF" style="height:40px"><span style="width:1px;height:28px;background:var(--color-divider)"></span><span class="nav-brand" style="margin:0">DAS</span></div><a href="#1a"><i lang="en">Home</i><i lang="ar">الرئيسية</i></a><a href="#1b"><i lang="en">Capture</i><i lang="ar">الالتقاط</i></a><a href="#1e"><i lang="en">Approvals</i><i lang="ar">الاعتمادات</i></a><a href="#1h"><i lang="en">Search</i><i lang="ar">البحث</i></a><a href="#1f"><i lang="en">Records</i><i lang="ar">السجلات</i></a><a href="#1j"><i lang="en">Integration</i><i lang="ar">التكامل</i></a><a href="#1k" aria-current="page"><i lang="en">Admin</i><i lang="ar">الإدارة</i></a></div>
+<div style="display:grid;grid-template-columns:260px 1fr 340px;min-height:720px">
+<nav class="side" style="border-inline-end:2px solid var(--color-divider);padding:12px 0">
+<div class="k" style="padding:6px 14px"><i lang="en">Workflow definitions</i><i lang="ar">تعريفات سير العمل</i></div>
+<a href="#1d" aria-current="page"><span><i lang="en">Document approval</i><i lang="ar">اعتماد الوثيقة</i></span><span class="tag tag-accent">v7</span></a>
+<a href="#1d"><span><i lang="en">Classification exception</i><i lang="ar">استثناء التصنيف</i></span><span class="tag tag-neutral">v3</span></a>
+<a href="#1d"><span><i lang="en">External sharing request</i><i lang="ar">طلب مشاركة خارجية</i></span><span class="tag tag-neutral">v2</span></a>
+<a href="#1d"><span><i lang="en">Disposition approval</i><i lang="ar">اعتماد التصرف النهائي</i></span><span class="tag tag-neutral">v4</span></a>
+<a href="#1d"><span><i lang="en">Transfer to National Archives</i><i lang="ar">النقل إلى الأرشيف الوطني</i></span><span class="tag tag-neutral">v1</span></a>
+<a href="#1d"><span><i lang="en">Retention plan change</i><i lang="ar">تغيير خطة الاحتفاظ</i></span><span class="tag tag-neutral">v2</span></a>
+<a href="#1d"><span><i lang="en">Legal hold apply / release</i><i lang="ar">تطبيق/رفع حجز قانوني</i></span><span class="tag tag-neutral">v1</span></a>
+<div class="k" style="padding:16px 14px 6px"><i lang="en">Sources</i><i lang="ar">المصادر</i></div>
+<a href="#1k"><span><i lang="en">Delegation matrix DoA-2026</i><i lang="ar">مصفوفة التفويض DoA-2026</i></span></a><a href="#1k"><span><i lang="en">Roles &amp; AD groups</i><i lang="ar">الأدوار ومجموعات AD</i></span></a>
+</nav>
+<main style="padding:20px 24px;display:flex;flex-direction:column;gap:16px;border-inline-end:2px solid var(--color-divider)">
+<div style="display:flex;align-items:flex-end;gap:12px"><div><div class="k"><i lang="en">Document approval · draft v8 · K2 process DAS.DocApproval</i><i lang="ar">اعتماد الوثيقة · مسودة v8</i></div><h4 style="margin:0"><i lang="en">Route rules</i><i lang="ar">قواعد المسار</i></h4></div><span style="margin-inline-start:auto"></span><a class="btn btn-secondary" href="#1d"><i lang="en">Simulate</i><i lang="ar">محاكاة</i></a><a class="btn btn-secondary" href="#1d"><i lang="en">Version history</i><i lang="ar">سجل الإصدارات</i></a><a class="btn btn-primary" href="#1d"><i lang="en">Publish v8</i><i lang="ar">نشر v8</i></a></div>
+<div style="font-size:13px;padding:10px 12px;background:var(--color-accent-100);border-inline-start:0;border-top:2px solid var(--color-accent)"><i lang="en">Rules are evaluated top-down at submit time; the first matching rule builds the route. Approvers are roles resolved against the delegation matrix and AD at run time — never named people.</i><i lang="ar">تُقيَّم القواعد من الأعلى للأسفل عند الإرسال؛ أول قاعدة مطابقة تبني المسار. المعتمدون أدوار تُحل من مصفوفة التفويض وAD وقت التشغيل — لا أشخاص محددون.</i></div>
+<table class="table dense">
+<thead><tr><th>#</th><th><i lang="en">When</i><i lang="ar">عندما</i></th><th><i lang="en">Route</i><i lang="ar">المسار</i></th><th><i lang="en">SLA / escalation</i><i lang="ar">مستوى الخدمة / التصعيد</i></th><th></th></tr></thead>
+<tbody>
+<tr><td>1</td><td><i lang="en">Confidentiality = Secret</i><i lang="ar">السرية = سري للغاية</i></td><td><i lang="en">Head of division → Information Owner → CISO</i><i lang="ar">رئيس الإدارة ← مالك المعلومات ← مدير أمن المعلومات</i> <span class="tag tag-neutral"><i lang="en">serial</i><i lang="ar">تسلسلي</i></span></td><td>8h · 24h · 24h → <i lang="en">Sector Director</i><i lang="ar">مدير القطاع</i></td><td><a class="btn btn-ghost" href="#1d"><i lang="en">Edit</i><i lang="ar">تعديل</i></a></td></tr>
+<tr style="background:var(--color-accent-100)"><td>2</td><td><i lang="en">Type ∈ {Policy, Delegation} AND Confidentiality ≥ Sensitive</i><i lang="ar">النوع ∈ {سياسة، تفويض} و السرية ≥ حساس</i></td><td><i lang="en">Head of division → Information Owner</i><i lang="ar">رئيس الإدارة ← مالك المعلومات</i> <span class="tag tag-neutral"><i lang="en">serial</i><i lang="ar">تسلسلي</i></span></td><td>8h · 24h → <i lang="en">Sector Director</i><i lang="ar">مدير القطاع</i></td><td><a class="btn btn-ghost" href="#1d"><i lang="en">Editing</i><i lang="ar">قيد التعديل</i></a></td></tr>
+<tr><td>3</td><td><i lang="en">Type = Contract AND ERP value &gt; AED 500,000</i><i lang="ar">النوع = عقد و قيمة ERP &gt; 500,000 درهم</i></td><td><i lang="en">Head of division ‖ Legal ‖ Finance → Information Owner</i><i lang="ar">رئيس الإدارة ‖ القانونية ‖ المالية ← مالك المعلومات</i> <span class="tag tag-accent"><i lang="en">parallel, all</i><i lang="ar">متوازٍ، الكل</i></span></td><td>24h · 48h → CEO office</td><td><a class="btn btn-ghost" href="#1d"><i lang="en">Edit</i><i lang="ar">تعديل</i></a></td></tr>
+<tr><td>4</td><td><i lang="en">Classification confidence &lt; 0.75</i><i lang="ar">ثقة التصنيف &lt; 0.75</i></td><td><i lang="en">Records officer (classify) → default route</i><i lang="ar">مسؤول السجلات (تصنيف) ← المسار الافتراضي</i></td><td>16h</td><td><a class="btn btn-ghost" href="#1d"><i lang="en">Edit</i><i lang="ar">تعديل</i></a></td></tr>
+<tr><td>5</td><td><i lang="en">Default</i><i lang="ar">افتراضي</i></td><td><i lang="en">Head of division</i><i lang="ar">رئيس الإدارة</i></td><td>8h → <i lang="en">Deputy</i><i lang="ar">النائب</i></td><td><a class="btn btn-ghost" href="#1d"><i lang="en">Edit</i><i lang="ar">تعديل</i></a></td></tr>
+</tbody></table>
+<div style="display:flex;gap:8px"><a class="btn btn-secondary" href="#1d">+ <i lang="en">Add rule</i><i lang="ar">إضافة قاعدة</i></a><a class="btn btn-ghost" href="#1d"><i lang="en">Reorder</i><i lang="ar">إعادة ترتيب</i></a></div>
+<h6 style="margin-top:8px"><i lang="en">Simulation · 30 days of real submissions replayed against v8</i><i lang="ar">محاكاة · إعادة تشغيل 30 يوماً من الإرسالات على v8</i></h6>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><div class="stat" style="padding:10px 12px"><div class="k"><i lang="en">Submissions</i><i lang="ar">إرسالات</i></div><div style="font:800 22px var(--font-heading)">1,284</div></div><div class="stat" style="padding:10px 12px"><div class="k"><i lang="en">Route changed vs v7</i><i lang="ar">تغيّر المسار مقارنة بـ v7</i></div><div style="font:800 22px var(--font-heading)">37</div></div><div class="stat" style="padding:10px 12px"><div class="k"><i lang="en">Unresolved role</i><i lang="ar">دور غير محلول</i></div><div style="font:800 22px var(--font-heading)" class="err">2</div></div><div class="stat" style="padding:10px 12px"><div class="k"><i lang="en">Median cycle</i><i lang="ar">وسيط الدورة</i></div><div style="font:800 22px var(--font-heading)">11 h</div></div></div>
+</main>
+<aside style="padding:20px;display:flex;flex-direction:column;gap:12px">
+<div class="k"><i lang="en">Rule 2 · step editor</i><i lang="ar">القاعدة 2 · محرر الخطوة</i></div>
+<div class="field"><label><i lang="en">Step name</i><i lang="ar">اسم الخطوة</i><span class="req">*</span></label><input class="input" value="Information Owner review"></div>
+<div class="field"><label><i lang="en">Approver role</i><i lang="ar">دور المعتمد</i><span class="req">*</span></label><select class="input"><option>Information Owner (from item metadata)</option><option>Head of division (DoA)</option><option>Sector Director (DoA)</option><option>CISO (AD group)</option><option>Records officer (AD group)</option></select></div>
+<div class="field"><label><i lang="en">Mode</i><i lang="ar">النمط</i><span class="req">*</span></label><span class="seg"><label class="seg-opt"><input type="radio" name="wm" checked><span><i lang="en">Serial</i><i lang="ar">تسلسلي</i></span></label><label class="seg-opt"><input type="radio" name="wm"><span><i lang="en">Parallel · all</i><i lang="ar">متوازٍ · الكل</i></span></label><label class="seg-opt"><input type="radio" name="wm"><span><i lang="en">Parallel · any</i><i lang="ar">متوازٍ · أي</i></span></label></span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="field"><label>SLA<span class="req">*</span></label><input class="input" value="24 h"></div><div class="field"><label><i lang="en">Reminder every</i><i lang="ar">تذكير كل</i><span class="opt">opt</span></label><input class="input" value="4 h"></div></div>
+<div class="field"><label><i lang="en">Escalate to</i><i lang="ar">التصعيد إلى</i><span class="req">*</span></label><select class="input"><option>Sector Director (DoA)</option></select></div>
+<div class="field"><label><i lang="en">Allowed outcomes</i><i lang="ar">النتائج المسموحة</i><span class="req">*</span></label><div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent"><i lang="en">Approve</i><i lang="ar">اعتماد</i></span><span class="tag tag-accent"><i lang="en">Approve w/ index change</i><i lang="ar">اعتماد مع تعديل</i></span><span class="tag tag-accent"><i lang="en">Return</i><i lang="ar">إعادة</i></span><span class="tag tag-accent"><i lang="en">Reject</i><i lang="ar">رفض</i></span><span class="tag tag-outline">+ <i lang="en">Delegate</i><i lang="ar">تفويض</i></span></div></div>
+<div class="field"><label><i lang="en">Reason code required on</i><i lang="ar">رمز السبب مطلوب عند</i></label><div style="display:flex;gap:14px;font-size:13px"><label class="radio"><input type="checkbox" checked><span class="dot"></span><i lang="en">Return</i><i lang="ar">إعادة</i></label><label class="radio"><input type="checkbox" checked><span class="dot"></span><i lang="en">Reject</i><i lang="ar">رفض</i></label></div></div>
+<div class="field"><label><i lang="en">On approve</i><i lang="ar">عند الاعتماد</i></label><select class="input"><option>Next step / finish → Content Organizer</option></select></div>
+<div class="field"><label><i lang="en">On return</i><i lang="ar">عند الإعادة</i></label><select class="input"><option>Back to originator (not to queue)</option></select></div>
+<div style="display:flex;gap:8px;margin-top:6px"><a class="btn btn-primary" href="#1d"><i lang="en">Apply to rule</i><i lang="ar">تطبيق</i></a><a class="btn btn-ghost" href="#1d"><i lang="en">Remove step</i><i lang="ar">إزالة الخطوة</i></a></div>
+</aside></div>
+</div></div>
+
+<!-- ═══════════ 1e APPROVAL INBOX ═══════════ -->
+<div class="dv-opt" id="1e"><div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Approval inbox · all workflow types, SLA, bulk decisions, delegation</div>
+<div class="dv-card" data-screen-label="1e Approval inbox">
+<div class="nav"><div style="display:flex;align-items:center;gap:12px;margin-inline-end:auto"><img src="uploads/adpf-logo.png" alt="ADPF" style="height:40px"><span style="width:1px;height:28px;background:var(--color-divider)"></span><span class="nav-brand" style="margin:0">DAS</span></div><a href="#1a"><i lang="en">Home</i><i lang="ar">الرئيسية</i></a><a href="#1b"><i lang="en">Capture</i><i lang="ar">الالتقاط</i></a><a href="#1e" aria-current="page"><i lang="en">Approvals</i><i lang="ar">الاعتمادات</i></a><a href="#1h"><i lang="en">Search</i><i lang="ar">البحث</i></a><a href="#1f"><i lang="en">Records</i><i lang="ar">السجلات</i></a><a href="#1j"><i lang="en">Integration</i><i lang="ar">التكامل</i></a><a href="#1k"><i lang="en">Admin</i><i lang="ar">الإدارة</i></a></div>
+<div style="padding:20px 28px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;align-items:flex-end;gap:12px"><h3 style="margin:0"><i lang="en">Approvals</i><i lang="ar">الاعتمادات</i></h3><span class="text-muted" style="font-size:13px"><i lang="en">K2 tasks assigned to you or your delegations</i><i lang="ar">مهام K2 المسندة إليك أو المفوضة لك</i></span><span style="margin-inline-start:auto"></span><a class="btn btn-secondary" href="#1e"><i lang="en">Set out-of-office delegate</i><i lang="ar">تعيين مفوض أثناء الغياب</i></a></div>
+<div class="tabs"><a href="#1e" aria-current="page"><i lang="en">Mine</i><i lang="ar">لي</i> · 7</a><a href="#1e"><i lang="en">Delegated to me</i><i lang="ar">مفوّض إليّ</i> · 2</a><a href="#1e"><i lang="en">Waiting on others</i><i lang="ar">بانتظار آخرين</i> · 5</a><a href="#1e"><i lang="en">Completed</i><i lang="ar">مكتملة</i></a><a href="#1e"><i lang="en">Escalated to me</i><i lang="ar">مُصعَّدة إليّ</i> · 1</a></div>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input class="input" style="width:280px" placeholder="Filter · تصفية"><select class="input" style="width:200px"><option>All workflow types · كل الأنواع</option></select><select class="input" style="width:160px"><option>Any SLA · أي مستوى</option></select><span style="margin-inline-start:auto;font-size:12px" class="text-muted"><i lang="en">2 selected</i><i lang="ar">2 محدد</i></span><a class="btn btn-secondary" href="#1e"><i lang="en">Approve selected</i><i lang="ar">اعتماد المحدد</i></a><a class="btn btn-ghost" href="#1e"><i lang="en">Delegate</i><i lang="ar">تفويض</i></a></div>
+<table class="table">
+<thead><tr><th></th><th><i lang="en">Workflow</i><i lang="ar">سير العمل</i></th><th><i lang="en">Item</i><i lang="ar">العنصر</i></th><th><i lang="en">Step</i><i lang="ar">الخطوة</i></th><th><i lang="en">Requester</i><i lang="ar">مقدم الطلب</i></th><th><i lang="en">Level</i><i lang="ar">المستوى</i></th><th>SLA</th><th></th></tr></thead>
+<tbody>
+<tr><td><input type="checkbox" checked></td><td><i lang="en">Document approval</i><i lang="ar">اعتماد وثيقة</i></td><td><span class="mono">SS-IT-PY-02-R4</span><br><span class="text-muted" style="font-size:12px"><i lang="en">Information Security Policy — Issue 4</i><i lang="ar">سياسة أمن المعلومات — الإصدار 4</i></span></td><td>1 / 2</td><td>Maryam A.</td><td><span class="pill p-sens"><i lang="en">Sensitive</i><i lang="ar">حساس</i></span></td><td class="err">3h 40m</td><td><a class="btn btn-ghost" href="#1c"><i lang="en">Review</i><i lang="ar">مراجعة</i></a></td></tr>
+<tr><td><input type="checkbox" checked></td><td><i lang="en">Document approval</i><i lang="ar">اعتماد وثيقة</i></td><td><span class="mono">SS-IT-CR-118</span><br><span class="text-muted" style="font-size:12px"><i lang="en">Contract renewal — network maintenance · AED 720,000</i><i lang="ar">تجديد عقد — صيانة الشبكة · 720,000 درهم</i></span></td><td>1 / 2 · <i lang="en">parallel</i><i lang="ar">متوازٍ</i></td><td>S. Hassan</td><td><span class="pill p-conf"><i lang="en">Confidential</i><i lang="ar">سري</i></span></td><td>22h</td><td><a class="btn btn-ghost" href="#1c"><i lang="en">Review</i><i lang="ar">مراجعة</i></a></td></tr>
+<tr><td><input type="checkbox"></td><td><i lang="en">External sharing</i><i lang="ar">مشاركة خارجية</i></td><td><span class="mono">SS-IT-RE-041</span><br><span class="text-muted" style="font-size:12px"><i lang="en">Vendor X · expires 15 Oct · watermark + IRM</i><i lang="ar">المورد X · ينتهي 15 أكتوبر</i></span></td><td>1 / 1</td><td>A. Al Ketbi</td><td><span class="pill p-sens"><i lang="en">Sensitive</i><i lang="ar">حساس</i></span></td><td>2d 6h</td><td><a class="btn btn-ghost" href="#1l"><i lang="en">Review</i><i lang="ar">مراجعة</i></a></td></tr>
+<tr><td><input type="checkbox"></td><td><i lang="en">Classification exception</i><i lang="ar">استثناء تصنيف</i></td><td><span class="mono">drop-off #4471</span><br><span class="text-muted" style="font-size:12px"><i lang="en">Scanned letter · no routing rule matched</i><i lang="ar">رسالة ممسوحة · لا قاعدة توجيه مطابقة</i></span></td><td>1 / 1</td><td>SS-02</td><td class="text-muted">—</td><td>1d 4h</td><td><a class="btn btn-ghost" href="#1b"><i lang="en">Classify</i><i lang="ar">تصنيف</i></a></td></tr>
+<tr><td><input type="checkbox"></td><td><i lang="en">Disposition approval</i><i lang="ar">اعتماد تصرف نهائي</i></td><td><i lang="en">Cycle 2026-Q3 · 184 items · IT-11 Helpdesk tickets</i><i lang="ar">دورة 2026-Q3 · 184 عنصراً · IT-11 تذاكر الدعم</i></td><td><i lang="en">Vote 2 / 5</i><i lang="ar">تصويت 2 / 5</i></td><td><i lang="en">Records &amp; Archives Unit</i><i lang="ar">وحدة السجلات</i></td><td><span class="pill p-open"><i lang="en">Open</i><i lang="ar">عام</i></span></td><td>6d</td><td><a class="btn btn-ghost" href="#1g"><i lang="en">Appraise</i><i lang="ar">تقييم</i></a></td></tr>
+<tr><td><input type="checkbox"></td><td><i lang="en">Retention plan change</i><i lang="ar">تغيير خطة الاحتفاظ</i></td><td><i lang="en">Series IT-04 · archive 10 → 15 yrs</i><i lang="ar">السلسلة IT-04 · وسيطة 10 ← 15 سنة</i></td><td>2 / 3</td><td>R. Al Shamsi</td><td class="text-muted">—</td><td>9d</td><td><a class="btn btn-ghost" href="#1k"><i lang="en">Review</i><i lang="ar">مراجعة</i></a></td></tr>
+<tr><td><input type="checkbox"></td><td><i lang="en">Legal hold — release</i><i lang="ar">رفع حجز قانوني</i></td><td>LH-2025-03 · <i lang="en">Case 118/2025 · 2,410 items</i><i lang="ar">القضية 118/2025 · 2,410 عناصر</i></td><td><i lang="en">Dual sign 1 / 2</i><i lang="ar">توقيع مزدوج 1 / 2</i></td><td><i lang="en">Legal &amp; Legislation</i><i lang="ar">القانونية</i></td><td class="text-muted">—</td><td>14d</td><td><a class="btn btn-ghost" href="#1l"><i lang="en">Review</i><i lang="ar">مراجعة</i></a></td></tr>
+</tbody></table>
+</div>
+</div></div>
+
+<!-- ═══════════ 1f RECORDS OFFICER CONSOLE ═══════════ -->
+<div class="dv-opt" id="1f"><div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>Records officer console · file plan (register), retention gates due, holds — the on-prem "policy view" from ADR-1</div>
+<div class="dv-card" data-screen-label="1f Records console">
+<div class="nav"><div style="display:flex;align-items:center;gap:12px;margin-inline-end:auto"><img src="uploads/adpf-logo.png" alt="ADPF" style="height:40px"><span style="width:1px;height:28px;background:var(--color-divider)"></span><span class="nav-brand" style="margin:0">DAS</span></div><a href="#1a"><i lang="en">Home</i><i lang="ar">الرئيسية</i></a><a href="#1b"><i lang="en">Capture</i><i lang="ar">الالتقاط</i></a><a href="#1e"><i lang="en">Approvals</i><i lang="ar">الاعتمادات</i></a><a href="#1h"><i lang="en">Search</i><i lang="ar">البحث</i></a><a href="#1f" aria-current="page"><i lang="en">Records</i><i lang="ar">السجلات</i></a><a href="#1j"><i lang="en">Integration</i><i lang="ar">التكامل</i></a><a href="#1k"><i lang="en">Admin</i><i lang="ar">الإدارة</i></a></div>
+<div style="display:grid;grid-template-columns:300px 1fr;min-height:700px">
+<div style="border-inline-end:2px solid var(--color-divider);padding:16px 0">
+<div class="k" style="padding:0 14px 8px"><i lang="en">File plan · 11 sectors · 39 divisions · 464 series</i><i lang="ar">خطة الملفات · 11 قطاعاً · 39 إدارة · 464 سلسلة</i></div>
+<div style="padding:0 14px 10px"><input class="input" placeholder="Find series · بحث عن سلسلة"></div>
+<nav class="side">
+<a href="#1f"><span>SS · <i lang="en">Support Services</i><i lang="ar">الخدمات المساندة</i></span><span class="text-muted">86</span></a>
+<a href="#1f" aria-current="page" style="padding-inline-start:28px"><span>IT · <i lang="en">Information Technology</i><i lang="ar">تقنية المعلومات</i></span><span class="text-muted">14</span></a>
+<a href="#1f" style="padding-inline-start:42px;font-size:12px"><span>IT-01 <i lang="en">Strategies &amp; plans</i><i lang="ar">الاستراتيجيات والخطط</i></span></a>
+<a href="#1f" style="padding-inline-start:42px;font-size:12px"><span>IT-04 <i lang="en">Information security policies</i><i lang="ar">سياسات أمن المعلومات</i></span><span class="tag tag-accent"><i lang="en">change pending</i><i lang="ar">تغيير معلق</i></span></a>
+<a href="#1f" style="padding-inline-start:42px;font-size:12px"><span>IT-07 <i lang="en">Contracts &amp; SLAs</i><i lang="ar">العقود</i></span></a>
+<a href="#1f" style="padding-inline-start:42px;font-size:12px"><span>IT-11 <i lang="en">Helpdesk tickets</i><i lang="ar">تذاكر الدعم</i></span><span class="tag tag-neutral"><i lang="en">disposal due</i><i lang="ar">إتلاف مستحق</i></span></a>
+<a href="#1f" style="padding-inline-start:28px"><span>HR · <i lang="en">Human Resources</i><i lang="ar">الموارد البشرية</i></span><span class="text-muted">22</span></a>
+<a href="#1f" style="padding-inline-start:28px"><span>PR · <i lang="en">Procurement</i><i lang="ar">المشتريات</i></span><span class="text-muted">18</span></a>
+<a href="#1f"><span>PO · <i lang="en">Pension Operations</i><i lang="ar">عمليات المعاشات</i></span><span class="text-muted">112</span></a>
+<a href="#1f"><span>IN · <i lang="en">Investment</i><i lang="ar">الاستثمار</i></span><span class="text-muted">64</span></a>
+<a href="#1f"><span>CC · <i lang="en">Corporate Communication</i><i lang="ar">الاتصال المؤسسي</i></span><span class="text-muted">31</span></a>
+</nav></div>
+<main style="padding:20px 28px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:flex-end;gap:12px"><div><div class="k"><i lang="en">Series · register row 214 · baseline v2026.1 (signed 02 Mar 2026)</i><i lang="ar">السلسلة · صف السجل 214 · الأساس v2026.1</i></div><h3 style="margin:2px 0 0">IT-04 · <i lang="en">Information security policies</i><i lang="ar">سياسات أمن المعلومات</i></h3></div><span style="margin-inline-start:auto"></span><a class="btn btn-secondary" href="#1h"><i lang="en">Pull whole series</i><i lang="ar">سحب السلسلة كاملة</i></a><a class="btn btn-secondary" href="#1l"><i lang="en">Apply hold</i><i lang="ar">تطبيق حجز</i></a><a class="btn btn-primary" href="#1k"><i lang="en">Propose retention change</i><i lang="ar">اقتراح تغيير الاحتفاظ</i></a></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider)">
+<div class="stat" style="padding:12px"><div class="k"><i lang="en">Items</i><i lang="ar">العناصر</i></div><div style="font:800 26px var(--font-heading)">1,208</div></div>
+<div class="stat" style="padding:12px"><div class="k"><i lang="en">Active</i><i lang="ar">جارية</i></div><div style="font:800 26px var(--font-heading)">312</div></div>
+<div class="stat" style="padding:12px"><div class="k"><i lang="en">Intermediate</i><i lang="ar">وسيطة</i></div><div style="font:800 26px var(--font-heading)">871</div></div>
+<div class="stat" style="padding:12px"><div class="k"><i lang="en">Permanent · WORM</i><i lang="ar">دائمة</i></div><div style="font:800 26px var(--font-heading)">25</div></div>
+<div class="stat" style="padding:12px"><div class="k"><i lang="en">On hold</i><i lang="ar">محجوزة</i></div><div style="font:800 26px var(--font-heading)">0</div></div>
+<div class="stat" style="padding:12px"><div class="k"><i lang="en">Gate 1 due · 90 d</i><i lang="ar">البوابة 1 مستحقة</i></div><div style="font:800 26px var(--font-heading)" class="warn">19</div></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+<div><h6><i lang="en">Rule in force · v2026.1</i><i lang="ar">القاعدة السارية · v2026.1</i></h6>
+<table class="table dense"><tbody>
+<tr><td class="text-muted" style="width:190px"><i lang="en">Series code</i><i lang="ar">رمز السلسلة</i></td><td class="mono">SS-IT-04</td></tr>
+<tr><td class="text-muted"><i lang="en">Classification</i><i lang="ar">التصنيف</i></td><td>F03 › F03.2 › F03.2.1</td></tr>
+<tr><td class="text-muted"><i lang="en">Default confidentiality</i><i lang="ar">السرية الافتراضية</i></td><td><span class="pill p-sens"><i lang="en">Sensitive</i><i lang="ar">حساس</i></span></td></tr>
+<tr><td class="text-muted"><i lang="en">Active retention</i><i lang="ar">الاحتفاظ الجاري</i></td><td>5 <i lang="en">yrs from Date archived</i><i lang="ar">سنوات من تاريخ الأرشفة</i></td></tr>
+<tr><td class="text-muted"><i lang="en">Archive retention</i><i lang="ar">الاحتفاظ الوسيط</i></td><td>10 <i lang="en">yrs</i><i lang="ar">سنوات</i> <span class="tag tag-accent"><i lang="en">→ 15 proposed</i><i lang="ar">← 15 مقترح</i></span></td></tr>
+<tr><td class="text-muted"><i lang="en">Final disposition</i><i lang="ar">التصرف النهائي</i></td><td><i lang="en">Permanent — transfer to National Archives</i><i lang="ar">دائم — نقل إلى الأرشيف الوطني</i></td></tr>
+<tr><td class="text-muted"><i lang="en">Vitality</i><i lang="ar">الحيوية</i></td><td><i lang="en">Vital</i><i lang="ar">حيوي</i></td></tr>
+<tr><td class="text-muted"><i lang="en">Content type</i><i lang="ar">نوع المحتوى</i></td><td>DAS Policy ← DAS Record ← DAS Base Document</td></tr>
+<tr><td class="text-muted"><i lang="en">Libraries</i><i lang="ar">المكتبات</i></td><td>/sites/das-ss/it/Policies · /sites/das-archive/F03-2</td></tr>
+<tr><td class="text-muted"><i lang="en">NLA approval</i><i lang="ar">اعتماد الأرشيف الوطني</i></td><td>NLA/RP/2021-0117 · <i lang="en">next 5-yearly review Mar 2027</i><i lang="ar">المراجعة الخمسية التالية مارس 2027</i></td></tr>
+</tbody></table></div>
+<div><h6><i lang="en">Retention gates due in this series</i><i lang="ar">بوابات الاحتفاظ المستحقة</i></h6>
+<table class="table dense"><thead><tr><th><i lang="en">Document</i><i lang="ar">الوثيقة</i></th><th><i lang="en">Gate</i><i lang="ar">البوابة</i></th><th><i lang="en">Due</i><i lang="ar">الاستحقاق</i></th><th></th></tr></thead><tbody>
+<tr><td class="mono">SS-IT-PY-01-R2</td><td>1 → <i lang="en">Archive Centre</i><i lang="ar">مركز الأرشيف</i></td><td>04 Oct</td><td><a href="#1i"><i lang="en">Open</i><i lang="ar">فتح</i></a></td></tr>
+<tr><td class="mono">SS-IT-PY-05-R1</td><td>1 → <i lang="en">Archive Centre</i><i lang="ar">مركز الأرشيف</i></td><td>11 Oct</td><td><a href="#1i"><i lang="en">Open</i><i lang="ar">فتح</i></a></td></tr>
+<tr><td class="mono">SS-IT-PY-02-R1</td><td>2 → <i lang="en">Disposition</i><i lang="ar">التصرف</i></td><td>30 Nov</td><td><a href="#1g"><i lang="en">Cycle</i><i lang="ar">الدورة</i></a></td></tr>
+<tr><td class="mono">SS-IT-PY-03-R4</td><td>1 → <i lang="en">Archive Centre</i><i lang="ar">مركز الأرشيف</i></td><td>02 Dec</td><td><a href="#1i"><i lang="en">Open</i><i lang="ar">فتح</i></a></td></tr>
+</tbody></table>
+<div style="margin-top:14px;padding:12px;background:var(--color-surface);font-size:12px"><div class="k" style="margin-bottom:4px"><i lang="en">Gate mechanics</i><i lang="ar">آلية البوابات</i></div><i lang="en">Gate 1 is executed by the information-management policy timer job and needs no approval. Gate 2 raises a disposition task; nothing moves until the committee votes. A hold suspends both.</i><i lang="ar">تُنفَّذ البوابة 1 بمهمة مؤقتة دون اعتماد. البوابة 2 تنشئ مهمة تصرف نهائي؛ لا يتحرك شيء قبل تصويت اللجنة. الحجز يعلّق البوابتين.</i></div></div>
+</div>
+</main></div>
+</div></div>
+
+<!-- ═══════════ 1g DISPOSITION CYCLE ═══════════ -->
+<div class="dv-opt" id="1g"><div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>Disposition cycle · committee appraisal — due list, vote, minute reference, certificate / transfer package</div>
+<div class="dv-card" data-screen-label="1g Disposition">
+<div class="nav"><div style="display:flex;align-items:center;gap:12px;margin-inline-end:auto"><img src="uploads/adpf-logo.png" alt="ADPF" style="height:40px"><span style="width:1px;height:28px;background:var(--color-divider)"></span><span class="nav-brand" style="margin:0">DAS</span></div><a href="#1a"><i lang="en">Home</i><i lang="ar">الرئيسية</i></a><a href="#1b"><i lang="en">Capture</i><i lang="ar">الالتقاط</i></a><a href="#1e"><i lang="en">Approvals</i><i lang="ar">الاعتمادات</i></a><a href="#1h"><i lang="en">Search</i><i lang="ar">البحث</i></a><a href="#1f" aria-current="page"><i lang="en">Records</i><i lang="ar">السجلات</i></a><a href="#1j"><i lang="en">Integration</i><i lang="ar">التكامل</i></a><a href="#1k"><i lang="en">Admin</i><i lang="ar">الإدارة</i></a></div>
+<div style="padding:20px 28px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:flex-end;gap:12px"><div><div class="k"><i lang="en">Disposition cycle 2026-Q3 · opened 01 Sep · committee of 5 · quorum 3</i><i lang="ar">دورة التصرف النهائي 2026-Q3 · افتُتحت 1 سبتمبر · لجنة من 5 · النصاب 3</i></div><h3 style="margin:2px 0 0"><i lang="en">Appraisal</i><i lang="ar">التقييم</i></h3></div><span style="margin-inline-start:auto"></span><div style="display:flex;gap:22px"><div class="step done"><i></i><i lang="en">Due list generated</i><i lang="ar">أُنشئت قائمة الاستحقاق</i></div><div class="step done"><i></i><i lang="en">Hold check</i><i lang="ar">فحص الحجز</i></div><div class="step cur"><i></i><i lang="en">Committee vote</i><i lang="ar">تصويت اللجنة</i></div><div class="step"><i></i><i lang="en">Minute ref.</i><i lang="ar">مرجع المحضر</i></div><div class="step"><i></i><i lang="en">Execute</i><i lang="ar">تنفيذ</i></div><div class="step"><i></i><i lang="en">Certificate</i><i lang="ar">الشهادة</i></div></div></div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider)">
+<div class="stat" style="padding:12px"><div class="k"><i lang="en">Batches due</i><i lang="ar">الدفعات المستحقة</i></div><div style="font:800 26px var(--font-heading)">9</div></div><div class="stat" style="padding:12px"><div class="k"><i lang="en">Items</i><i lang="ar">العناصر</i></div><div style="font:800 26px var(--font-heading)">3,462</div></div><div class="stat" style="padding:12px"><div class="k"><i lang="en">Excluded · on hold</i><i lang="ar">مستثناة · محجوزة</i></div><div style="font:800 26px var(--font-heading)">118</div></div><div class="stat" style="padding:12px"><div class="k"><i lang="en">Recommend destroy</i><i lang="ar">مقترح للإتلاف</i></div><div style="font:800 26px var(--font-heading)">2,905</div></div><div class="stat" style="padding:12px"><div class="k"><i lang="en">Recommend transfer</i><i lang="ar">مقترح للنقل</i></div><div style="font:800 26px var(--font-heading)">439</div></div>
+</div>
+<table class="table">
+<thead><tr><th><i lang="en">Series batch</i><i lang="ar">دفعة السلسلة</i></th><th><i lang="en">Items</i><i lang="ar">العناصر</i></th><th><i lang="en">Register says</i><i lang="ar">وفق السجل</i></th><th><i lang="en">Holds</i><i lang="ar">حجوزات</i></th><th><i lang="en">Votes</i><i lang="ar">الأصوات</i></th><th><i lang="en">Your vote</i><i lang="ar">صوتك</i><span class="req">*</span></th><th><i lang="en">Minute ref.</i><i lang="ar">مرجع المحضر</i><span class="req">*</span></th></tr></thead>
+<tbody>
+<tr><td>IT-11 · <i lang="en">Helpdesk tickets 2016</i><i lang="ar">تذاكر الدعم 2016</i><br><span class="text-muted" style="font-size:12px">5 y + 5 y · <i lang="en">expired 31 Aug</i><i lang="ar">انتهى 31 أغسطس</i></span></td><td>184</td><td><i lang="en">Destroy</i><i lang="ar">إتلاف</i></td><td class="ok">0</td><td>2 ✓ · 0 ✗</td><td><span class="seg"><label class="seg-opt"><input type="radio" name="v1" checked><span><i lang="en">Destroy</i><i lang="ar">إتلاف</i></span></label><label class="seg-opt"><input type="radio" name="v1"><span><i lang="en">Retain</i><i lang="ar">إبقاء</i></span></label><label class="seg-opt"><input type="radio" name="v1"><span><i lang="en">Appraise</i><i lang="ar">تقييم</i></span></label></span></td><td><input class="input" style="width:150px" value="DC-2026-09-03"></td></tr>
+<tr><td>HR-22 · <i lang="en">Leave requests 2015</i><i lang="ar">طلبات الإجازات 2015</i><br><span class="text-muted" style="font-size:12px">3 y + 7 y</span></td><td>1,912</td><td><i lang="en">Destroy</i><i lang="ar">إتلاف</i></td><td class="warn">12 <i lang="en">excluded</i><i lang="ar">مستثنى</i></td><td>1 ✓ · 1 ✗</td><td><span class="seg"><label class="seg-opt"><input type="radio" name="v2"><span><i lang="en">Destroy</i><i lang="ar">إتلاف</i></span></label><label class="seg-opt"><input type="radio" name="v2"><span><i lang="en">Retain</i><i lang="ar">إبقاء</i></span></label><label class="seg-opt"><input type="radio" name="v2"><span><i lang="en">Appraise</i><i lang="ar">تقييم</i></span></label></span></td><td><input class="input" style="width:150px" placeholder="DC-…"></td></tr>
+<tr><td>IT-04 · <i lang="en">Info-sec policies 2011</i><i lang="ar">سياسات أمن المعلومات 2011</i><br><span class="text-muted" style="font-size:12px">5 y + 10 y · <i lang="en">permanent</i><i lang="ar">دائم</i></span></td><td>6</td><td><i lang="en">Transfer to NLA</i><i lang="ar">نقل للأرشيف الوطني</i></td><td class="ok">0</td><td>3 ✓ · 0 ✗</td><td><span class="seg"><label class="seg-opt"><input type="radio" name="v3" checked><span><i lang="en">Transfer</i><i lang="ar">نقل</i></span></label><label class="seg-opt"><input type="radio" name="v3"><span><i lang="en">Retain</i><i lang="ar">إبقاء</i></span></label></span></td><td><input class="input" style="width:150px" value="DC-2026-09-03"></td></tr>
+<tr><td>CC-08 · <i lang="en">Event photography 2013</i><i lang="ar">تصوير الفعاليات 2013</i><br><span class="text-muted" style="font-size:12px"><i lang="en">audio-visual class · 1.9 TB</i><i lang="ar">فئة سمعية بصرية · 1.9 تيرابايت</i></span></td><td>433</td><td><i lang="en">Appraise</i><i lang="ar">تقييم</i></td><td class="ok">0</td><td>0 ✓ · 0 ✗</td><td><span class="seg"><label class="seg-opt"><input type="radio" name="v4"><span><i lang="en">Destroy</i><i lang="ar">إتلاف</i></span></label><label class="seg-opt"><input type="radio" name="v4"><span><i lang="en">Transfer</i><i lang="ar">نقل</i></span></label><label class="seg-opt"><input type="radio" name="v4"><span><i lang="en">Retain</i><i lang="ar">إبقاء</i></span></label></span></td><td><input class="input" style="width:150px" placeholder="DC-…"></td></tr>
+</tbody></table>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+<div style="padding:14px;background:var(--color-surface)"><h6 style="margin-top:0"><i lang="en">On execute — destroy</i><i lang="ar">عند التنفيذ — إتلاف</i></h6><div style="font-size:13px"><i lang="en">Content and BLOB deleted from all tiers and backups' retention window noted; destruction certificate DAS-DC-2026-Q3-nnn generated on the NLA template; audit record survives the document (ISO 27001 A.8.10). Physical items produce a pick-list per storage location.</i><i lang="ar">يُحذف المحتوى من
+</x-dc>
+</body>
+</html>
